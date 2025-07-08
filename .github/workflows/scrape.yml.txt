@@ -1,0 +1,35 @@
+name: Scrape BAMF Außenstellen
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'   # jeden Montag um 06:00 UTC (08:00 MEZ)
+  workflow_dispatch:       # manuell startbar
+  push:
+    branches:
+      - main
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🛠️ Installiere R
+        uses: r-lib/actions/setup-r@v2
+
+      - name: 📦 Installiere R-Pakete
+        run: |
+          Rscript -e 'install.packages(c("httr", "tidyr", "purrr", "dplyr", "readr"))'
+
+      - name: 🚀 Starte Scraper
+        run: Rscript bamf_scraper.R
+
+      - name: 💾 Commit CSV falls geändert
+        run: |
+          git config --global user.name "urs-bot"
+          git config --global user.email "urs@example.com"
+          git add bamf_außenstellen.csv
+          git commit -m "Update BAMF Außenstellen CSV" || echo "Keine Änderungen"
+          git push
