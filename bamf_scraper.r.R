@@ -1,13 +1,13 @@
 # AUTOMATIC SCRAPING
 
-# 📦 Pakete laden
+#  Pakete laden
 library(httr)
 library(tidyr)
 library(purrr)
 library(dplyr)
 library(readr)
 
-# 🚀 Daten abrufen
+#  Daten abrufen
 df <- purrr::map_dfr(1:39, ~{
   url <- sprintf("https://bamf-navi.bamf.de/atlas-backend/behoerden/as%d/rekos", .x)
   res <- httr::GET(url, config = httr::accept_json())
@@ -17,7 +17,7 @@ df <- purrr::map_dfr(1:39, ~{
     tidyr::unnest_wider(v1)
 })
 
-# 📊 Aufbereiten
+#  Aufbereiten
 df_preg <- df %>%
   dplyr::mutate(bereich_n = lengths(bereich)) %>%
   tidyr::unnest_longer(bereich) %>%
@@ -27,7 +27,7 @@ df_reg <- df_preg %>%
   dplyr::group_by(asId, bereich) %>%
   dplyr::summarize(N_rek = sum(vz_reg), .groups = "drop")
 
-# 💾 Speichern
+#  Speichern
 readr::write_csv(df_reg, "bamf_außenstellen.csv")
 
 
