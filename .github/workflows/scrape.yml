@@ -35,7 +35,4 @@ jobs:
           git commit -m "Update BAMF Außenstellen CSV" || echo "Keine Änderungen"
           git push
 
- - name:  Geänderte Dateien committen und pushen
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "Automatisches Update: BAMF Scrape"
+
