@@ -22,7 +22,7 @@ jobs:
       - name:  Installiere R-Pakete stabil
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
-        packages: httr, tidyr, purrr, dplyr, readr
+          packages: httr, tidyr, purrr, dplyr, readr
 
       - name:  Starte Scraper
         run: Rscript bamf_scraper.R
