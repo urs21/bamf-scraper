@@ -27,12 +27,15 @@ jobs:
       - name:  Starte Scraper
         run: Rscript bamf_scraper.R
 
-      - name:  Commit CSV falls geändert
+      - name: Commit CSV falls geändert
         run: |
           git config --global user.name "urs-bot"
-          git config --global user.email "urs@example.com"
-          git add bamf_außenstellen.csv
+   	  git config --global user.email "urs@example.com"
+    	  git add bamf_außenstellen.csv
           git commit -m "Update BAMF Außenstellen CSV" || echo "Keine Änderungen"
           git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
 
