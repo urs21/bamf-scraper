@@ -27,7 +27,7 @@ jobs:
       - name:  Starte Scraper
         run: Rscript bamf_scraper.R
 
-      - name: Commit CSV falls geändert
+      - name:  Commit CSV falls geändert
 	env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
