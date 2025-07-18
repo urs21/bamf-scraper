@@ -35,6 +35,7 @@ jobs:
           git config --global user.email "urs@example.com"
           git add bamf_außenstellen.csv
           git commit -m "Update BAMF Außenstellen CSV" || echo "Keine Änderungen"
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
           git push
         
 
