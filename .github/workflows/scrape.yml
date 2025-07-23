@@ -25,7 +25,7 @@ jobs:
           packages: httr, tidyr, sf, dplyr, tidyverse
 
       - name:  Starte Scraper
-        run: Rscript scrape_courses.R
+        run: Rscript 02_scrape_courses.R
 
       - name: Commit CSV falls geändert
         env:
