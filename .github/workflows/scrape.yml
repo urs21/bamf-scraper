@@ -1,4 +1,4 @@
-name: Scrape BAMF Außenstellen
+name: Scrape Integration Course Finder
 
 on:
   schedule:
@@ -22,10 +22,10 @@ jobs:
       - name:  Installiere R-Pakete stabil
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          packages: httr, tidyr, purrr, dplyr, readr
+          packages: httr, tidyr, sf, dplyr, tidyverse
 
       - name:  Starte Scraper
-        run: Rscript bamf_scraper.R
+        run: Rscript scrape_courses.R
 
       - name: Commit CSV falls geändert
         env:
@@ -33,8 +33,8 @@ jobs:
         run: |
           git config --global user.name "urs-bot"
           git config --global user.email "urs@example.com"
-          git add bamf_außenstellen.csv
-          git commit -m "Update BAMF Außenstellen CSV" || echo "Keine Änderungen"
+          git add *.rds
+          git commit -m "Update Kurse RDS" || echo "Keine Änderungen"
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
           git push
         
