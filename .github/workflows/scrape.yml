@@ -2,7 +2,7 @@ name: Scrape Integration Course Finder
 
 on:
   schedule:
-    - cron: '0 6 * * 1'   # jeden Montag um 06:00 UTC (08:00 MEZ)
+    - cron: '0 7 * * *'   # jeden Tag um 07:00 UTC (09:00 MEZ)
   workflow_dispatch:       # manuell startbar
   push:
     branches:
