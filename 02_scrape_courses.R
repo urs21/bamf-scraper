@@ -148,7 +148,7 @@ for (i in seq_along(coord_list)) {
   message(sprintf("Listing %d/%d (%.1f%%)",
                   i, length(coord_list), i/length(coord_list)*100))
 
-  Sys.sleep(1)  # Pause von 1 Sekunde zwischen den Anfragen
+  Sys.sleep(3)  # Pause von 1 Sekunde zwischen den Anfragen
 }
 
 
