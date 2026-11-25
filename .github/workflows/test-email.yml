@@ -1,0 +1,32 @@
+
+name: Test E-Mail-Benachrichtigung
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-email:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Testmail versenden
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: mail.gmx.net
+          server_port: 465
+          secure: true
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORT }}
+          from: ${{ secrets.MAIL_USERNAME }}
+          to: knoblauch@dezim-institut.de,khalil@dezim-institut.de,harder@dezim-institut.de
+          subject: "TEST: BAMF-Scraper E-Mail-Benachrichtigung"
+          body: |
+            Dies ist eine Testnachricht.
+
+            Der E-Mail-Versand über GitHub Actions funktioniert.
+
+            Repository: ${{ github.repository }}
+            Zeitpunkt: ${{ github.run_id }}
+
+            Wenn du diese Nachricht erhältst,
+            ist der E-Mail-Versand erfolgreich eingerichtet.
