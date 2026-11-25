@@ -16,17 +16,18 @@ jobs:
           server_port: 465
           secure: true
           username: ${{ secrets.MAIL_USERNAME }}
-          password: ${{ secrets.MAIL_PASSWORT }}
+          password: ${{ secrets.MAIL_PASSWORD }}
           from: ${{ secrets.MAIL_USERNAME }}
           to: knoblauch@dezim-institut.de,khalil@dezim-institut.de,harder@dezim-institut.de
           subject: "TEST: BAMF-Scraper E-Mail-Benachrichtigung"
           body: |
             Dies ist eine Testnachricht.
 
-            Der E-Mail-Versand über GitHub Actions funktioniert.
+            Der E-Mail-Versand über GitHub Actions wurde getestet.
 
             Repository: ${{ github.repository }}
-            Zeitpunkt: ${{ github.run_id }}
+            Workflow: ${{ github.workflow }}
+            Run-ID: ${{ github.run_id }}
 
             Wenn du diese Nachricht erhältst,
-            ist der E-Mail-Versand erfolgreich eingerichtet.
+            funktioniert der E-Mail-Versand.
