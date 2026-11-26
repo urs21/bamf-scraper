@@ -1,21 +1,18 @@
 
-name: Test E-Mail bei Fehler
+name: Test Fehler-E-Mail
 
 on:
   workflow_dispatch:
 
 jobs:
-  test-email:
+  test:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Absichtlich einen Fehler auslösen
-        run: |
-          echo "Dies ist ein absichtlicher Testfehler."
-          exit 1
+      - name: Fehler simulieren
+        run: exit 1
 
-      - name: Testmail nach Fehler versenden
-        if: always()
+      - name: E-Mail bei Fehler senden
+        if: failure()
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: mail.gmx.net
@@ -25,12 +22,5 @@ jobs:
           password: ${{ secrets.MAIL_PASSWORD }}
           from: ${{ secrets.MAIL_USERNAME }}
           to: knoblauch@dezim-institut.de,khalil@dezim-institut.de,harder@dezim-institut.de
-          subject: "TEST: BAMF-Scraper Fehlerbenachrichtigung"
-          body: |
-            Dies ist eine absichtlich ausgelöste Testfehlermeldung.
-
-            Der E-Mail-Versand wurde nach einem Fehler getestet.
-
-            Repository: ${{ github.repository }}
-            Workflow: ${{ github.workflow }}
-            Run-ID: ${{ github.run_id }}
+          subject: "TEST: Fehler-E-Mail funktioniert"
+          body: "Dies ist ein Test. GitHub hat einen Fehler erkannt und die Benachrichtigung ausgelöst."
